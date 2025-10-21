@@ -1,0 +1,50 @@
+import java.util.Scanner;
+
+public class CRC {
+    public static int n;
+    public static String generator = "10001000000100001";
+
+    public String divide(String input) {
+        int genLen = generator.length();
+        StringBuilder dividend = new StringBuilder(input);
+        for (int i = 0; i <= dividend.length() - genLen; i++) {
+            if (dividend.charAt(i) == '1') {
+                for (int j = 0; j < genLen; j++) {
+                    if (dividend.charAt(i + j) == generator.charAt(j)) {
+                        dividend.setCharAt(i + j, '0');
+                    } else {
+                        dividend.setCharAt(i + j, '1');
+                    }
+                }
+            }
+        }
+        return dividend.toString();
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        CRC crc = new CRC();
+        String copy, rec, code;
+        String zeros = "0000000000000000";
+        System.out.println("enter the dataword to be sent");
+        code = sc.nextLine();
+        n = code.length();
+        copy = code;
+        code += zeros;
+        code = crc.divide(code);
+        System.out.println("dataword = " + copy);
+        String crcCode = code.substring(n);
+        System.out.print("CRC = ");
+        System.out.println(crcCode);
+        String transmittedFrame = copy + crcCode;
+        System.out.println("transmitted frame is = " + transmittedFrame);
+        System.out.println("enter received data:");
+        rec = sc.nextLine();
+        if (zeros.equals(crc.divide(rec).substring(n))) {
+            System.out.println("correct bits received");
+        } else {
+            System.out.println("received frame contains one or more error");
+        }
+        sc.close();
+    }
+}
