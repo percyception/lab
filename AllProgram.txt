@@ -1377,6 +1377,24 @@ selectionSort($students, 'name');
 </html>
 
 
+CREATE TABLE students (
+    id INT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    usn VARCHAR(20) NOT NULL UNIQUE,
+    branch VARCHAR(50) NOT NULL
+);
+
+
+
+INSERT INTO students (id, name, usn, branch) VALUES
+(1, 'Aarav Sharma', '1VT21CS001', 'Computer Science'),
+(2, 'Diya Patel', '1VT21EC002', 'Electronics'),
+(3, 'Rohan Mehta', '1VT21ME003', 'Mechanical'),
+(4, 'Sneha Iyer', '1VT21CV004', 'Civil'),
+(5, 'Karan Verma', '1VT21IS005', 'Information Science');
+
+
+
 
 9.
 
